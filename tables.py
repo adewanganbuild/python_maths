@@ -1,25 +1,27 @@
 import random
-import datetime
+from time import time
 
 correct = 0
 incorrect = 0
-total = 5
+total = 10
 total_time = 0;
 
 for i in range(total):
-  n1 = random.randrange(1,10)
-  n2 = random.randrange(1,10)
-  start = datetime.datetime.now()
+  n1 = random.randrange(3,16)
+  n2 = random.randrange(2,11)
+  start = int(time() * 1000)
 
   try:
     ans = int(input(str(n1) + " X " + str(n2) + " = "))
   except ValueError:
     print("That wasn't a number!")
     incorrect+=1
+    end = int(time() * 1000)
+    total_time = end - start
     continue
 
-  end = datetime.datetime.now()
-  total_time = end - start
+  end = int(time() * 1000)
+  total_time += end - start
 
   corr_ans = n1 * n2
 
@@ -30,7 +32,7 @@ for i in range(total):
     print('Aah ... miseed. Correct answer is: ' + str(corr_ans))
     incorrect+=1
 
-print('You got %d correct out of %d in %s' % (correct, total, str(total_time)))
+print('You got %d correct out of %d in %s secs' % (correct, total, str(total_time/1000)))
 
 
 
